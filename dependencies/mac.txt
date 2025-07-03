@@ -1,5 +1,6 @@
 azure-cli
 doctl
+stow
 elixir
 ffmpeg
 figlet
@@ -14,7 +15,8 @@ nvm
 php
 python@3.10
 qrencode
-stow
 terraform
 watch
 wget
+docker
+colima
