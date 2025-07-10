@@ -47,11 +47,7 @@ dgo() {
 }
 
 kgo() {
-	kubectl exec -it "$1" bash
-}
-
-clbin() {
-	curl -F 'clbin=<-' https://clbin.com
+	kubectl exec --stdin --tty "$1" --  bash
 }
 
 # go alias
