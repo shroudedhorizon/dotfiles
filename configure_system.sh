@@ -55,7 +55,18 @@ install_dependencies() {
         xargs sudo dnf install -y < dependencies/rhel.txt
     elif command -v brew >/dev/null 2>&1; then
         echo "Homebrew detected. Installing dependencies"
-        xargs brew install < dependencies/mac.txt
+        while IFS= read -r package || [ -n "$package" ]; do
+            if [[ -z "$package" ]]; then
+                continue
+            fi
+            
+            # format is cask:package
+            if [[ "$package" == cask:* ]]; then
+                brew install --cask "${package#cask:}"
+            else
+                brew install "$package"
+            fi
+        done < dependencies/mac.txt
     else
         echo "Unable to detect your package manager."
         exit 1;

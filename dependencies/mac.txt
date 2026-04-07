@@ -20,3 +20,4 @@ watch
 wget
 docker
 colima
+cask:ghostty
