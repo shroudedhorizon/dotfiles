@@ -17,12 +17,12 @@
 
 ## ***Environment***
 
-- **OS**: Mac OS 11 / Linux Mint / Fedora 41
-- **Terminal**: iTerm 2 / Terminator
+- **OS**: Mac OS / Linux Mint / Fedora
+- **Terminal**: Ghostty / Terminator
 - **Editor**: NeoVim
-- **Browser**: Firefox
+- **Browser**: Brave
 - **Shell**: Zsh
-- **App Laucher**: Finder / Rofi
+- **App Laucher**: Spotlight / Rofi
 - **Font**: JetBrainsMonoNFM
 
 ## ***Installation***
