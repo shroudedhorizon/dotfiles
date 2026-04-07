@@ -1,15 +1,14 @@
 
 <div align="center">
-<img width="30%" src="./assets/catgorl.png">
+<img width="15%" src="./assets/catgorl.png">
 </div>
 
 <div align="center">
   <p></p>
   <p><b><i> ~ Minimalistic Dotfiles ~ </i></b></p>
-  <img src="https://img.shields.io/github/last-commit/dynalar/dotfiles/main?color=%23c4a7e7&style=for-the-badge">
-  <img src="https://img.shields.io/github/repo-size/dynalar/dotfiles?color=%23e0def4&style=for-the-badge">
-  <img src="https://img.shields.io/github/stars/dynalar/dotfiles?color=%23ebbcba&style=for-the-badge">
-  <img src="https://img.shields.io/github/license/dynalar/dotfiles?color=%239ccfd8&style=for-the-badge">
+  <img src="https://img.shields.io/github/last-commit/shroudedhorizon/dotfiles/main?color=%23c4a7e7&style=for-the-badge">
+  <img src="https://img.shields.io/github/repo-size/shroudedhorizon/dotfiles?color=%23e0def4&style=for-the-badge">
+  <img src="https://img.shields.io/github/license/shroudedhorizon/dotfiles?color=%239ccfd8&style=for-the-badge">
 </div>
 
 

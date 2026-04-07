@@ -9,7 +9,7 @@
         "apiKey": ""
       },
       "models": {
-        "qwen3.5-30B": { "name": "Fuck It We Ball Type Shit Model" }
+        "qwen3.5-30B": { "name": "" }
       }
     }
   }
