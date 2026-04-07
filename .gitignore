@@ -1,5 +1,7 @@
 config/.config/nvim/plugin/*
+config/.config/opencode/opencode.json
 zsh/.zshrc
+
 .DS_Store
 ._.DS_Store
 **/.DS_Store

@@ -3,7 +3,7 @@
   "provider": {
     "llama.cpp-thunder": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "Ubb's LLM instance",
+      "name": "",
       "options": {
         "baseURL": "",
         "apiKey": ""
