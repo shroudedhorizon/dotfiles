@@ -77,14 +77,21 @@ install_dependencies() {
     fi
 }
 
+install_zsh() {
+    # run the command to install zshrc
+    echo "Installing oh my zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+    # install powerlevel10k
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+}
+
 #######
 # function calls
 #
 set_rtc_time
 
-# run the command to install zshrc
-echo "Installing oh my zsh..."
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+install_zsh
 
 set_correct_dotfiles
 

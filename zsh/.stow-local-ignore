@@ -1,3 +1,2 @@
 # stow will ignore any files in this file
-mac/.zshrc
-linux/.zshrc
+.*
