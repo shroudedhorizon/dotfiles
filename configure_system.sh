@@ -56,10 +56,6 @@ install_dependencies() {
     elif command -v brew >/dev/null 2>&1; then
         echo "Homebrew detected. Installing dependencies"
         while IFS= read -r package || [ -n "$package" ]; do
-            if [[ -z "$package" ]]; then
-                continue
-            fi
-            
             # format is cask:package
             if [[ "$package" == cask:* ]]; then
                 brew install --cask "${package#cask:}"
