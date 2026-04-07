@@ -1,7 +1,8 @@
 #!/bin/bash
 
-OS_TYPE=$(uname);
+OS_TYPE=$(uname)
 USERNAME=$(whoami)
+DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # sets the RTC time to 1 to avoid inaccurate time when dual booting
 set_rtc_time() {
@@ -22,15 +23,22 @@ set_rtc_time() {
     fi
 }
 
-# copy over the correct dotfiles depending on the operating system we're running
+# symlink the correct dotfiles depending on the operating system we're running
 set_correct_dotfiles() {
+    local selected_zshrc
+
     if [[ "$OS_TYPE" == "Darwin" ]]; then
-        rm -f ~/.zshrc && cp zsh/zshrc.mac zsh/.zshrc
+        selected_zshrc="mac/.zshrc"
     elif [[ "$OS_TYPE" == "Linux" ]]; then
-        rm -f ~/.zshrc && cp zsh/zshrc.linux zsh/.zshrc
+        selected_zshrc="linux/.zshrc"
+    else
+        echo "Unsupported OS: $OS_TYPE"
+        exit 1
     fi
 
-    echo "Dotfiles set according to OS."
+    ln -sfn "$DOTFILES_DIR/zsh/$selected_zshrc" "$HOME/.zshrc"
+
+    echo "Dotfiles set according to OS. $DOTFILES_DIR/zsh/$selected_zshrc -> $HOME/.zshrc"
 }
 
 # install homebrew if on mac
@@ -69,9 +77,9 @@ install_dependencies() {
     fi
 }
 
-
-# function calls
 #######
+# function calls
+#
 set_rtc_time
 
 # run the command to install zshrc
