@@ -1,6 +1,6 @@
 
 <div align="center">
-<img width="20%" src="./assets/catgorl.png">
+<img width="20%" src="./assets/catgorl.jpg">
 </div>
 
 <div align="center">
