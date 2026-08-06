@@ -43,8 +43,4 @@ make all
 ```
 
 ## ***Windows Installation***
-For windows, things are a bit different. Copy the windows/ directory into any place you wish, and then run
-```powershell
-run.bat
-```
-This script will install all of the dependencies I use on windows.
+See the `windows/` directory [README.md](../windows/README.md).
