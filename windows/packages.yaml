@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: nvidia
+      directives:
+        description: Install NVidia App
+      settings:
+        id: XP8CLZL93F5Z4P
+        source: msstore
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: afterburner
+      directives:
+        description: Install MSI Afterburner
+      settings:
+        id: Guru3D.Afterburner
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: git
+      directives:
+        description: Install Git
+        allowPrerelease: false
+      settings:
+        id: Git.Git
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vscode
+      directives:
+        description: Install Visual Studio Code
+      settings:
+        id: Microsoft.VisualStudioCode
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: spotify
+      directives:
+        description: Install Spotify
+      settings:
+        id: Spotify.Spotify
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: powertoys
+      directives:
+        description: Install PowerToys
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: discord
+      directives:
+        description: Install Discord
+      settings:
+        id: Discord.Discord
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: steam
+      directives:
+        description: Install Steam
+      settings:
+        id: Valve.Steam
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: rider
+      directives:
+        description: Install Rider
+      settings:
+        id: JetBrains.Rider
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: dotnet_10_sdk
+      directives:
+        description: Install .NET 10 SDK
+      settings:
+        id: Microsoft.DotNet.SDK.10
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Brave
+      directives:
+        description: Install Brave
+      settings:
+        id: Brave.Brave
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: revouninstaller
+      directives:
+        description: Install RevoUninstaller
+      settings:
+        id: RevoUninstaller.RevoUninstaller
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: rufus
+      directives:
+        description: Install Rufus
+      settings:
+        id: Rufus.Rufus
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: notepadplusplus
+      directives:
+        description: Install Notepad++
+      settings:
+        id: Notepad++.Notepad++
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: deluge
+      directives:
+        description: Install Deluge
+      settings:
+        id: DelugeTeam.Deluge
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: 7zip
+      directives:
+        description: Install 7zip
+      settings:
+        id: 7zip.7zip
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: vlc
+      directives:
+        description: Install VLC
+      settings:
+        id: VideoLAN.VLC
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: gamesir
+      directives:
+        description: Gamesir Nexus
+      settings:
+        id: 9PMJKF5NSTDR
+        source: msstore
