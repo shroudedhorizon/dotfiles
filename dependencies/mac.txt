@@ -21,5 +21,4 @@ wget
 docker
 colima
 cask:ghostty
-cask:mac-mouse-fix
 anomalyco/tap/opencode
