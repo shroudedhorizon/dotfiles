@@ -12,6 +12,7 @@
    `ms-settings:taskbar`
 
    - Taskbar Behaviors → Automatically Hide Taskbar: **Enable**
+   - Customize any other taskbar like widgets, search bar, etc.
 
 3. Open Run (`Win+R`) and enter:
 
@@ -29,6 +30,10 @@
 
    `winget configure packages.dsc.yaml`
 
-6. Install the drivers listed in: `drivers.txt`
+6. Install any system drivers under [Drivers](#drivers) section.
 
 7. Import the PowerToys settings file: `.ptb`
+
+# Drivers
+Motherboard:  
+https://www.msi.com/Motherboard/MAG-B550-TOMAHAWK-MAX-WIFI/support
