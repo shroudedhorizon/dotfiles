@@ -6,18 +6,19 @@
 <div align="center">
   <p></p>
   <p><b><i> ~ Personal Dotfiles ~ </i></b></p>
-  <img src="https://img.shields.io/github/last-commit/shroudedhorizon/dotfiles/main?color=%23c4a7e7&style=for-the-badge">
-  <img src="https://img.shields.io/github/repo-size/shroudedhorizon/dotfiles?color=%23e0def4&style=for-the-badge">
-  <img src="https://img.shields.io/github/license/shroudedhorizon/dotfiles?color=%239ccfd8&style=for-the-badge">
+  <img src="https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=F0F0F0">
+  <img src="https://custom-icon-badges.demolab.com/badge/Windows-0078D6?logo=windows11&logoColor=white">
+  <img src="https://img.shields.io/badge/Linux%20Mint-87CF3E?logo=linuxmint&logoColor=fff">
+  <img src="https://img.shields.io/badge/Pop!__OS-48B9C7?logo=popos&logoColor=fff">
+  <img src="https://img.shields.io/badge/Fedora-51A2DA?logo=fedora&logoColor=fff">
 </div>
 
 
 | ![1](./assets/s1.jpg) | ![2](./assets/s2.jpg) |
 | --- | --- |
 
-## ***Environment***
+## ***Tools***
 
-- **OS**: macOS / Linux Mint / Pop OS / Fedora
 - **Terminal**: Ghostty / Terminator
 - **Editor**: NeoVim
 - **Browser**: Brave
