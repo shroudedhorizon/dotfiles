@@ -28,7 +28,7 @@
 
 5. Run to install packages:
 
-   `winget configure packages.dsc.yaml`
+   `winget configure packages.yaml`
 
 6. Install any system drivers under [Drivers](#drivers) section.
 
