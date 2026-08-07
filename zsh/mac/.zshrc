@@ -11,10 +11,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # Not needed, currently overridden by Starship
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 
-# Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
+# For docker and k8s aliases, use the docker and kubectl plugins.
 plugins=(git history)
 
 source $ZSH/oh-my-zsh.sh
@@ -23,27 +23,9 @@ source $ZSH/oh-my-zsh.sh
 EXTRA_ALIASES=~/.zshrc.additions && test -f $EXTRA_ALIASES && source $EXTRA_ALIASES
 
 # aliases
-alias k="/usr/local/bin/kubectl"
 alias dev='cd ~/projects'
 alias dots='cd ~/dotfiles'
-alias dps='docker ps'
 alias gclean='git reset --hard && git clean -fd'
-
-dgo() {
-	# default entering into container with root user unless otherwise specified
-	dockerUser="root"
-
-	if [ ! -z "$2" ]
-	then
-		dockerUser=$2
-	fi
-
-	docker exec -it --user "$2" "$1" bash
-}
-
-kgo() {
-	kubectl exec -it "$1" bash
-}
 
 # go alias
 export PATH="$PATH:$(go env GOPATH)/bin"
