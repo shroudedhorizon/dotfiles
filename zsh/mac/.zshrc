@@ -19,7 +19,7 @@ plugins=(git history)
 
 source $ZSH/oh-my-zsh.sh
 
-# to add more aliases without editing this main file, add them in ~/.zshrc.additions
+# To add more aliases without editing this main file, add them in ~/.zshrc.additions.
 EXTRA_ALIASES=~/.zshrc.additions && test -f $EXTRA_ALIASES && source $EXTRA_ALIASES
 
 # aliases
@@ -48,10 +48,9 @@ kgo() {
 # go alias
 export PATH="$PATH:$(go env GOPATH)/bin"
 
-# nvm alias
-export NVM_DIR=~/.nvm
- [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
+# Lazy load nvm as I hardly ever use it.
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 
 eval "$(starship init zsh)"
