@@ -2,6 +2,11 @@ format = """
 $username$os\
 $directory\
 $git_branch\
+$dotnet\
+$php\
+$nodejs\
+$helm\
+$java\
 $git_status\
 $git_commit\
 $time\
@@ -49,7 +54,7 @@ disabled = false
 Windows = "󰍲"
 Ubuntu = "󰕈"
 SUSE = ""
-Raspbian = "󰐿"
+Raspbian = ""
 Mint = "󰣭"
 Macos = "󰀵"
 Manjaro = ""
@@ -57,10 +62,8 @@ Linux = "󰌽"
 Gentoo = "󰣨"
 Fedora = "󰣛"
 Alpine = ""
-Android = ""
 Arch = "󰣇"
 Artix = "󰣇"
-EndeavourOS = ""
 CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
@@ -70,7 +73,7 @@ Pop = ""
 [directory]
 style = "fg:color_blue bold"
 format = '( in [ $path ]($style))'
-truncation_length = 3
+truncation_length = 2
 truncation_symbol = "…/"
 
 [directory.substitutions]
@@ -108,6 +111,32 @@ format = """
 [$symbol](fg:overlay1) """
 success_symbol = '[](fg:text bold)'
 error_symbol   = '[](fg:red bold)'
+
+# ======= Languages =========
+[dotnet]
+symbol = ' '
+style = 'bold purple'
+format = ' via [$symbol($version)($tfm)]($style)'
+
+[php]
+symbol = ' '   
+style = 'bold purple'
+format = ' via [$symbol($version)]($style)'
+
+[nodejs]
+symbol = ' '   
+style = 'bold green'
+format = ' via [$symbol($version)]($style)'
+
+[java]
+symbol = ' '   
+style = 'bold red'
+format = ' via [${symbol}(${version} )]($style)'
+
+[helm]
+symbol = ' '   
+style = 'bold white'
+format = ' via [$symbol($version)]($style)'
 
 # ======= Program Environments ========
 [python]
