@@ -23,24 +23,6 @@ set_rtc_time() {
     fi
 }
 
-# symlink the correct dotfiles depending on the operating system we're running
-set_correct_dotfiles() {
-    local selected_zshrc
-
-    if [[ "$OS_TYPE" == "Darwin" ]]; then
-        selected_zshrc="mac/.zshrc"
-    elif [[ "$OS_TYPE" == "Linux" ]]; then
-        selected_zshrc="linux/.zshrc"
-    else
-        echo "Unsupported OS: $OS_TYPE"
-        exit 1
-    fi
-
-    ln -sfn "$DOTFILES_DIR/zsh/$selected_zshrc" "$HOME/.zshrc"
-
-    echo "Dotfiles set according to OS. $DOTFILES_DIR/zsh/$selected_zshrc -> $HOME/.zshrc"
-}
-
 # install homebrew if on mac
 install_homebrew() {
     # install homebrew and dependencies
@@ -92,8 +74,6 @@ install_zsh() {
 set_rtc_time
 
 install_zsh
-
-set_correct_dotfiles
 
 install_homebrew
 

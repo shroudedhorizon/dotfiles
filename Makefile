@@ -1,4 +1,6 @@
 all:
 	./configure_system.sh
 	stow --verbose --target=$$HOME --restow */ --adopt
-	chsh -s /bin/zsh
+	@if [ "$$SHELL" != "/bin/zsh" ]; then \
+		chsh -s /bin/zsh; \
+	fi
