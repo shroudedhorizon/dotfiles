@@ -12,7 +12,7 @@
 </div>
 
 
-| ![1](./assets/s1.png) | ![2](./assets/s2.png) |
+| ![1](./assets/s1.jpg) | ![2](./assets/s2.jpg) |
 | --- | --- |
 
 ## ***Environment***
