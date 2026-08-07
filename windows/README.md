@@ -26,7 +26,7 @@
 
    - Set **High Performance Profile**
 
-5. Run:
+5. Run to install packages:
 
    `winget configure packages.dsc.yaml`
 
