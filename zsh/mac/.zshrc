@@ -3,15 +3,13 @@
 #
 current_host=$(hostname -s)
 figlet -f $HOME/smslant.flf $current_host
-
-echo ""
 fortune
-echo ""
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-#ZSH_THEME="powerlevel10k/powerlevel10k"
+# Not needed, currently overridden by Starship
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
