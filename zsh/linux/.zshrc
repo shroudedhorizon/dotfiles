@@ -18,7 +18,7 @@ EXTRA_ALIASES=~/.zshrc.additions && test -f $EXTRA_ALIASES && source $EXTRA_ALIA
 ###### motd #####
 #
 current_host=$(hostname -s)
-figlet -f $HOME/smslant.flf $current_host
+figlet -f $HOME/rectangles.flf $current_host
 
 echo ""
 fortune

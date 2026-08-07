@@ -2,7 +2,7 @@
 #
 #
 current_host=$(hostname -s)
-figlet -f $HOME/smslant.flf $current_host
+figlet -f $HOME/rectangles.flf $current_host
 fortune
 
 # Path to your oh-my-zsh installation.
@@ -46,8 +46,7 @@ kgo() {
 }
 
 # go alias
-export PATH="${HOME}/.local/bin:${PATH}"
-export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 # nvm alias
 export NVM_DIR=~/.nvm
