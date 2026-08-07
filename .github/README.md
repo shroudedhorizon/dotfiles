@@ -17,7 +17,7 @@
 
 ## ***Environment***
 
-- **OS**: Mac OS / Linux Mint / Fedora
+- **OS**: macOS / Linux Mint / Pop OS / Fedora
 - **Terminal**: Ghostty / Terminator
 - **Editor**: NeoVim
 - **Browser**: Brave
@@ -32,7 +32,7 @@
 
 Dependencies are listed within the `dependencies/` directory.
 
-### Example
+### Usage
 
 ```bash
 cd ~
@@ -43,4 +43,4 @@ make all
 ```
 
 ## ***Windows Installation***
-See the `windows/` directory [README.md](../windows/README.md).
+See this [README.md](../windows/README.md).

@@ -23,6 +23,24 @@ set_rtc_time() {
     fi
 }
 
+set_up_git() {
+    # Skip setup if a global Git config already exists.
+    if [[ -f "$HOME/.gitconfig" ]]; then
+        echo "Found existing ~/.gitconfig. Skipping Git user configuration."
+        exit 0
+    fi
+
+    read -rp "Enter your full name: " git_name
+    read -rp "Enter your email address: " git_email
+
+    git config --global user.name "$git_name"
+    git config --global user.email "$git_email"
+
+    echo "Git has been configured:"
+    echo "  Name : $(git config --global user.name)"
+    echo "  Email: $(git config --global user.email)"
+}
+
 # install homebrew if on mac
 install_homebrew() {
     # install homebrew and dependencies
@@ -78,5 +96,7 @@ install_zsh
 install_homebrew
 
 install_dependencies
+
+set_up_git
 
 echo "All dependencies installed! Changing shell for the final step..."
