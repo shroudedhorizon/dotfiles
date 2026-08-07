@@ -91,7 +91,7 @@ format = '( on [$symbol $branch]($style))'
 [git_status]
 disabled = false
 style = "fg:color_orange"
-format = ' <([$all_status]($style))>'
+format = ' <([$all_status$ahead_behind]($style))>'
 
 [git_commit]
 disabled = false
