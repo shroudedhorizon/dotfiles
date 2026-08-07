@@ -1,5 +1,4 @@
 config/.config/nvim/plugin/*
-zsh/.zshrc
 
 .DS_Store
 ._.DS_Store
