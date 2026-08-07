@@ -4,6 +4,19 @@ OS_TYPE=$(uname)
 USERNAME=$(whoami)
 DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
+install_repo() {
+    if [ -d "$HOME/dotfiles" ]; then
+        echo "dotfiles already exist, skipping install"
+        return 0
+    fi
+
+    curl -L https://github.com/shroudedhorizon/dotfiles/archive/refs/heads/main.zip -o /tmp/dotfiles.zip 
+    unzip -q /tmp/dotfiles.zip -d . 
+    mv dotfiles-main ~/dotfiles
+    rm /tmp/dotfiles.zip
+    cd ~/dotfiles
+}
+
 # sets the RTC time to 1 to avoid inaccurate time when dual booting
 set_rtc_time() {
     if [[ "$OS_TYPE" == "Linux" ]]; then
@@ -27,7 +40,6 @@ set_up_git() {
     # Skip setup if a global Git config already exists.
     if [[ -f "$HOME/.gitconfig" ]]; then
         echo "Found existing ~/.gitconfig. Skipping Git user configuration."
-        exit 0
     fi
 
     read -rp "Enter your full name: " git_name
@@ -86,17 +98,25 @@ install_zsh() {
     curl -sS https://starship.rs/install.sh | sh
 }
 
-#######
-# function calls
-#
-set_rtc_time
+post_install() {
+    stow --verbose --target="$HOME" --restow */ --adopt
+	if [ "$$SHELL" != "/bin/zsh" ]; then
+		chsh -s /bin/zsh;
+	fi
+}
 
-install_zsh
+run_all() {
+    install_repo
+    set_rtc_time
+    install_zsh
+    install_homebrew
+    install_dependencies
+    set_up_git
+    post_install
+}
 
-install_homebrew
-
-install_dependencies
-
-set_up_git
-
-echo "All dependencies installed! Changing shell for the final step..."
+if [[ $# -eq 0 ]]; then
+    run_all
+else
+    "$@"
+fi
