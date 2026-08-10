@@ -74,10 +74,10 @@ install_dependencies() {
     echo "Installing dependencies based on OS package manager..."
     if command -v apt >/dev/null 2>&1; then
         echo "APT detected. Installing dependencies..."
-        xargs sudo apt install -y < dependencies/deb.txt
+        xargs sudo apt install -y < $HOME/dotfiles/dependencies/deb.txt
     elif command -v dnf >/dev/null 2>&1; then
         echo "DNF detected. Installing dependencies..."
-        xargs sudo dnf install -y < dependencies/rhel.txt
+        xargs sudo dnf install -y < $HOME/dotfiles/dependencies/rhel.txt
     elif command -v brew >/dev/null 2>&1; then
         echo "Homebrew detected. Installing dependencies"
         while IFS= read -r package || [ -n "$package" ]; do
@@ -87,7 +87,7 @@ install_dependencies() {
             else
                 brew install "$package"
             fi
-        done < dependencies/mac.txt
+        done < $HOME/dotfiles/dependencies/mac.txt
     else
         echo "Unable to detect your package manager."
         exit 1;
