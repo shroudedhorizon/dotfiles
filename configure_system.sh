@@ -3,6 +3,8 @@
 OS_TYPE=$(uname)
 USERNAME=$(whoami)
 
+set -euo pipefail
+
 install_repo() {
     if [ -d "$HOME/dotfiles" ]; then
         echo "The dotfiles repo already exists, skipping install..."
