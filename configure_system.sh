@@ -100,11 +100,20 @@ install_dependencies() {
 
 install_zsh() {
     # run the command to install zshrc
-    echo "Installing oh my zsh..."
-    git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        echo "Installing oh my zsh..."
+        git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+    else
+        echo "Oh my zsh is already installed. Skipping..."
+    fi
 
-    # install starship
-    curl -sS https://starship.rs/install.sh | sh
+    # install starship if not installed
+    if command -v starship >/dev/null 2>&1; then
+        echo "Starship is already installed. Skipping..."
+    else
+        echo "Installing Starship..."
+        curl -sS https://starship.rs/install.sh | sh
+    fi
 }
 
 post_install() {    
