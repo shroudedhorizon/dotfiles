@@ -1,12 +1,36 @@
 #!/bin/bash
 
+set -euo pipefail
+
+# the type of ssh key to generate.
+KEY_TYPE="ed25519"
+
+# system global vars
 OS_TYPE=$(uname)
 USERNAME=$(whoami)
-DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
-install_repo() {
+# Set Up Terminal colors
+if [[ -t 1 ]]; then
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[0;33m'
+    BLUE='\033[0;34m'
+    CYAN='\033[0;36m'
+    BOLD='\033[1m'
+    RESET='\033[0m'
+else
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    CYAN=''
+    BOLD=''
+    RESET=''
+fi
+
+install_dotfiles_repo() {
     if [ -d "$HOME/dotfiles" ]; then
-        echo "dotfiles already exist, skipping install"
+        info "The dotfiles repo already exists, skipping install..."
         return 0
     fi
 
@@ -20,89 +44,165 @@ install_repo() {
 # sets the RTC time to 1 to avoid inaccurate time when dual booting
 set_rtc_time() {
     if [[ "$OS_TYPE" == "Linux" ]]; then
-        # Print message before running the command
-        echo "Setting local RTC to 1..."
+        info "Setting local RTC to 1..."
 
-        # Run the command with sudo and store the exit code in a variable
         sudo timedatectl set-local-rtc 1
         exit_code=$?
 
         # Check the exit code to determine if the command ran successfully
         if [ $exit_code -eq 0 ]; then
-            echo "Local RTC set to 1 successfully."
+            info "Local RTC set to 1 successfully."
         else
-            echo "Error: Failed to set local RTC to 1. Exit code: $exit_code"
+            error "Error: Failed to set local RTC to 1. Exit code: $exit_code"
         fi
     fi
 }
 
-set_up_git() {
+set_up_git_config() {
     # Skip setup if a global Git config already exists.
     if [[ -f "$HOME/.gitconfig" ]]; then
-        echo "Found existing ~/.gitconfig. Skipping Git user configuration."
+        info "Found existing ~/.gitconfig. Skipping Git user configuration."
+        return 0
     fi
 
-    read -rp "Enter your full name: " git_name
-    read -rp "Enter your email address: " git_email
+    warning ".gitconfig not found. Creating a new one..."
+    
+    local git_name="${1:-}"
+    local git_email="${2:-}"
+    local public_key="${3:-}"
 
+    while [[ -z "$git_name" ]]; do
+        read -rp "Enter your full name: " git_name
+    done
+
+    while [[ -z "$git_email" ]]; do
+        read -rp "Enter your email address: " git_email
+    done
+
+    while [[ -z "$public_key" ]]; do
+        read -rp "Enter your SSH Public Key from Bitwarden: " public_key
+    done
+
+    info "SSH key found, using for signing..."
+    git config --global gpg.format ssh
+    git config --global user.signingkey "$public_key"
+    git config --global commit.gpgsign true
     git config --global user.name "$git_name"
     git config --global user.email "$git_email"
 
-    echo "Git has been configured:"
-    echo "  Name : $(git config --global user.name)"
-    echo "  Email: $(git config --global user.email)"
+    local gpg_format
+    local gpg_sign
+    gpg_format="$(git config --global gpg.format || true)"
+    gpg_sign="$(git config --global commit.gpgsign || true)"
+
+    success "Git config has been set:"
+    success "  Name : $(git config --global user.name)"
+    success "  Email: $(git config --global user.email)"
+    success "  GPG Signing Key Format: ${gpg_format:-Not Configured}"
+    success "  GPG Signing Enabled: ${gpg_sign:-Not Configured}"
 }
 
 # install homebrew if on mac
 install_homebrew() {
     # install homebrew and dependencies
     if [[ "$OS_TYPE" == "Darwin" ]]; then
-        echo "Installing homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USERNAME/.zprofile
-        source /Users/$USERNAME/.zprofile
+        if command -v brew >/dev/null 2>&1; then
+            info "Homebrew is already installed. Skipping..."
+            return 0
+        else
+            info "Installing homebrew..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USERNAME/.zprofile
+            source /Users/$USERNAME/.zprofile
+        fi
     fi
 }
 
 # install dependencies based on pkg manager
 install_dependencies() {
-    echo "Installing dependencies based on OS package manager..."
+    info "Installing dependencies based on OS package manager..."
     if command -v apt >/dev/null 2>&1; then
-        echo "APT detected. Installing dependencies..."
-        xargs sudo apt install -y < dependencies/deb.txt
+        info "APT detected. Installing dependencies..."
+        xargs sudo apt install -y < $HOME/dotfiles/dependencies/deb.txt
     elif command -v dnf >/dev/null 2>&1; then
-        echo "DNF detected. Installing dependencies..."
-        xargs sudo dnf install -y < dependencies/rhel.txt
+        info "DNF detected. Installing dependencies..."
+        xargs sudo dnf install -y < $HOME/dotfiles/dependencies/rhel.txt
     elif command -v brew >/dev/null 2>&1; then
-        echo "Homebrew detected. Installing dependencies"
-        while IFS= read -r package || [ -n "$package" ]; do
-            # format is cask:package
-            if [[ "$package" == cask:* ]]; then
-                brew install --cask "${package#cask:}"
-            else
-                brew install "$package"
-            fi
-        done < dependencies/mac.txt
+        info "Homebrew detected. Installing dependencies"
+
+        if ! command -v brew >/dev/null 2>&1; then
+            error "Homebrew is not installed."
+            exit 1
+        fi
+
+        brew bundle --file="$HOME/dotfiles/dependencies/Brewfile"
     else
-        echo "Unable to detect your package manager."
+        error "Unable to detect your package manager."
         exit 1;
     fi
 }
 
 install_zsh() {
     # run the command to install zshrc
-    echo "Installing oh my zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        info "Installing oh my zsh..."
+        git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+    else
+        info "Oh my zsh is already installed. Skipping..."
+    fi
 
-    # install starship
-    curl -sS https://starship.rs/install.sh | sh
+    # install starship if not installed
+    if command -v starship >/dev/null 2>&1; then
+        info "Starship is already installed. Skipping..."
+    else
+        info "Installing Starship..."
+        curl -sS https://starship.rs/install.sh | sh
+    fi
+}
+
+set_dotfile_configs() {
+    cd "$HOME/dotfiles"
+
+    # set all of the top level dotfiles first
+    for package in */; do
+        [[ "$package" == "zsh/" ]] && continue
+        stow --verbose --target="$HOME" --restow --adopt "$package"
+    done
+
+    # get the right stow package based on the OS
+    local zsh_package
+    case "$OS_TYPE" in
+        Darwin)
+            zsh_package="mac"
+            ;;
+        Linux)
+            zsh_package="linux"
+            ;;
+        *)
+            error "Unsupported operating system: $OS_TYPE"
+            return 1
+            ;;
+    esac
+
+    # stow the OS specific configs
+    stow \
+        --verbose \
+        --dir="$HOME/dotfiles/zsh" \
+        --target="$HOME" \
+        --restow \
+        --adopt \
+        common "$zsh_package"
+
+    if [[ "$SHELL" != "/bin/zsh" ]]; then
+        chsh -s /bin/zsh
+    fi
 }
 
 post_install() {
-    stow --verbose --target="$HOME" --restow */ --adopt
-	if [ "$$SHELL" != "/bin/zsh" ]; then
-		chsh -s /bin/zsh;
-	fi
+    set_dotfile_configs
+
+    cd
+    zsh
 }
 
 run_all() {
@@ -111,10 +211,30 @@ run_all() {
     install_zsh
     install_homebrew
     install_dependencies
-    set_up_git
+    set_up_git_config
     post_install
 }
 
+####################
+# utility methods
+####################
+info() {
+    echo -e "${BLUE}==>${RESET} $*"
+}
+
+success() {
+    echo -e "${GREEN}✓${RESET} $*"
+}
+
+warning() {
+    echo -e "${YELLOW}!${RESET} $*"
+}
+
+error() {
+    echo -e "${RED}✗${RESET} $*" >&2
+}
+
+# run all methods in this script if a param isn't passed (param being the function name)
 if [[ $# -eq 0 ]]; then
     run_all
 else

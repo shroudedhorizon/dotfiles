@@ -1,5 +1,6 @@
 format = """
 $username$os\
+${custom.caffeinate}\
 $directory\
 $git_branch\
 $dotnet\
@@ -13,10 +14,10 @@ $time\
 \n$python\
 $character\
 """
-
+ 
 # ============= Color Palette ================
 palette = 'cyberdream'
-
+ 
 [palettes.cyberdream]
 text      = '#c7cfff'
 overlay1  = '#242937'
@@ -32,24 +33,24 @@ color_red    = '#ff6e5e'
 color_yellow = '#f1ff5e'
 color_pink   = '#ff5ea0'
 red = '#ff6e5e'
-
+ 
 # ============= Modules ================
 [hostname]
 ssh_only = false
 format = '[$ssh_symbol](bold blue)on [$hostname](bold red) '
 disabled = false
-
+ 
 [username]
 show_always = true
 style_user = "fg:text bold"
 style_root = "fg:red bold"
 format = '[$user ]($style)'
-
+ 
 [os]
 style = "fg:color_pink"
 format = "[$symbol ]($style)"
 disabled = false
-
+ 
 [os.symbols]
 Windows = "󰍲"
 Ubuntu = "󰕈"
@@ -69,77 +70,84 @@ Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 Pop = ""
-
+ 
 [directory]
 style = "fg:color_blue bold"
 format = '( in [ $path ]($style))'
 truncation_length = 2
 truncation_symbol = "…/"
-
+ 
 [directory.substitutions]
 "Documents" = "󰈙 "
 "Downloads" = " "
 "Music"     = " "
 "Pictures"  = " "
-
+ 
 [git_branch]
 style = "fg:color_yellow"
 disabled = false
 symbol = ""
 format = '( on [$symbol $branch]($style))'
-
+ 
 [git_status]
 disabled = false
 style = "fg:color_orange"
 format = ' <([$all_status$ahead_behind]($style))>'
-
+ 
 [git_commit]
 disabled = false
 only_detached = false
 format = ' [ $hash](fg:color_pink)'
 commit_hash_length = 6
 tag_disabled = false
-
+ 
 [time]
 disabled = false
 time_format = "%R"
 style = "fg:color_aqua"
 format = '  [$time]($style)'
-
+ 
 [character]
 format = """
 [$symbol](fg:overlay1) """
 success_symbol = '[](fg:text bold)'
 error_symbol   = '[](fg:red bold)'
-
+ 
 # ======= Languages =========
 [dotnet]
 symbol = ' '
 style = 'bold purple'
 format = ' via [$symbol($version)($tfm)]($style)'
-
+ 
 [php]
 symbol = ' '   
 style = 'bold purple'
 format = ' via [$symbol($version)]($style)'
-
+ 
 [nodejs]
 symbol = ' '   
 style = 'bold green'
 format = ' via [$symbol($version)]($style)'
-
+ 
 [java]
 symbol = ' '   
 style = 'bold red'
 format = ' via [${symbol}(${version} )]($style)'
-
+ 
 [helm]
 symbol = ' '   
 style = 'bold white'
 format = ' via [$symbol($version)]($style)'
-
+ 
 # ======= Program Environments ========
 [python]
 disabled = false
 symbol = ""
 format = '([$symbol $virtualenv ](fg:color_yellow))'
+ 
+# ======= Custom =======
+[custom.caffeinate]
+when = 'pgrep -x caffeinate >/dev/null'
+symbol = ' '
+style = 'bold #bf5700'
+format = '[$symbol]($style)'
