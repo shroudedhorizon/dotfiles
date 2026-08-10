@@ -27,12 +27,10 @@
 - **Font**: JetBrainsMonoNFM
 
 ## ***Installation from CLI Script***
-These steps are recommended for work computers, containers, and other potentially ephemeral systems.
-1. Run this command below
-`curl -s https://raw.githubusercontent.com/shroudedhorizon/dotfiles/refs/heads/main/configure_system.sh | sh`
-
-Follow the system prompts on screen.
-
+This method is recommended for use with work computers, containers, and other potentially ephemeral systems.
+```bash
+curl -s https://raw.githubusercontent.com/shroudedhorizon/dotfiles/refs/heads/main/configure_system.sh | sh
+```
 ## ***Installation with Git***
 These steps are recommended if you want to make changes to these dotfiles yourself and commit them. For personal computers.
 1. Clone this directory to your home directory.
@@ -44,7 +42,7 @@ cd ~
 
 cd dotfiles/
 
-make all
+make install
 ```
 
 ## ***Windows Installation***
