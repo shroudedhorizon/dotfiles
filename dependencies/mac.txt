@@ -8,7 +8,7 @@ fortune
 gtk4
 helm
 imagemagick
-screenfetch
+fastfetch
 neovim
 nmap
 nvm
@@ -19,6 +19,5 @@ terraform
 watch
 wget
 docker
-colima
 cask:ghostty
 anomalyco/tap/opencode
