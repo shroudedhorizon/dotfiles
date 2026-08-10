@@ -29,7 +29,7 @@
 ## ***Installation from CLI Script***
 This method is recommended for use with work computers, containers, and other potentially ephemeral systems.
 ```bash
-curl -s https://raw.githubusercontent.com/shroudedhorizon/dotfiles/refs/heads/main/configure_system.sh | sh
+curl -fsSL https://raw.githubusercontent.com/shroudedhorizon/dotfiles/refs/heads/main/configure_system.sh | sh
 ```
 ## ***Installation with Git***
 These steps are recommended if you want to make changes to these dotfiles yourself and commit them. For personal computers.
