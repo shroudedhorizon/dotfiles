@@ -6,7 +6,7 @@ DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 install_repo() {
     if [ -d "$HOME/dotfiles" ]; then
-        echo "dotfiles already exist, skipping install"
+        echo "The dotfiles repo already exists, skipping install..."
         return 0
     fi
 
@@ -98,7 +98,7 @@ install_dependencies() {
 install_zsh() {
     # run the command to install zshrc
     echo "Installing oh my zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
 
     # install starship
     curl -sS https://starship.rs/install.sh | sh
@@ -106,9 +106,12 @@ install_zsh() {
 
 post_install() {
     stow --verbose --target="$HOME" --restow */ --adopt
-	if [ "$$SHELL" != "/bin/zsh" ]; then
+
+	if [ "$SHELL" != "/bin/zsh" ]; then
 		chsh -s /bin/zsh;
 	fi
+
+    cd && zsh
 }
 
 run_all() {
