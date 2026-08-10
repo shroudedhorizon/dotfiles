@@ -67,10 +67,15 @@ set_up_git() {
 install_homebrew() {
     # install homebrew and dependencies
     if [[ "$OS_TYPE" == "Darwin" ]]; then
-        echo "Installing homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USERNAME/.zprofile
-        source /Users/$USERNAME/.zprofile
+        if command -v brew >/dev/null 2>&1; then
+            echo "Homebrew is already installed. Skipping..."
+            return 0
+        else
+            echo "Installing homebrew..."
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/$USERNAME/.zprofile
+            source /Users/$USERNAME/.zprofile
+        fi
     fi
 }
 
