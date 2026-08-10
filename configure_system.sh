@@ -44,6 +44,9 @@ set_up_git() {
         return 0
     fi
 
+	local git_name=""
+	local git_email=""
+
     while [[ -z "$git_name" ]]; do
         read -rp "Enter your full name: " git_name
     done
