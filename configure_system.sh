@@ -2,7 +2,6 @@
 
 OS_TYPE=$(uname)
 USERNAME=$(whoami)
-DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 install_repo() {
     if [ -d "$HOME/dotfiles" ]; then
@@ -104,7 +103,9 @@ install_zsh() {
     curl -sS https://starship.rs/install.sh | sh
 }
 
-post_install() {
+post_install() {    
+    cd $HOME/dotfiles
+
     stow --verbose --target="$HOME" --restow */ --adopt
 
 	if [ "$SHELL" != "/bin/zsh" ]; then
