@@ -40,10 +40,16 @@ set_up_git() {
     # Skip setup if a global Git config already exists.
     if [[ -f "$HOME/.gitconfig" ]]; then
         echo "Found existing ~/.gitconfig. Skipping Git user configuration."
+        return 0
     fi
 
-    read -rp "Enter your full name: " git_name
-    read -rp "Enter your email address: " git_email
+    while [[ -z "$git_name" ]]; do
+        read -rp "Enter your full name: " git_name
+    done
+
+    while [[ -z "$git_email" ]]; do
+        read -rp "Enter your email address: " git_email
+    done
 
     git config --global user.name "$git_name"
     git config --global user.email "$git_email"
