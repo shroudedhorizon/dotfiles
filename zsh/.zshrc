@@ -19,8 +19,12 @@ plugins=(git history)
 
 source $ZSH/oh-my-zsh.sh
 
-# To add more aliases without editing this main file, add them in ~/.zshrc.additions.
-EXTRA_ALIASES=~/.zshrc.additions && test -f $EXTRA_ALIASES && source $EXTRA_ALIASES
+# Load additional zsh configurations, located in .zshrc.d/*.aliases
+if [[ -d ~/.zshrc.d ]]; then
+    for config in ~/.zshrc.d/*.aliases; do
+        [[ -r "$config" ]] && source "$config"
+    done
+fi
 
 # aliases
 alias dev='cd ~/projects'
