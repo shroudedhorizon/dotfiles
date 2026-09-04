@@ -21,6 +21,7 @@ if [[ -d ~/.zshrc.d ]]; then
 fi
 
 # aliases
+alias vim="nvim"
 alias dev='cd ~/projects'
 alias dots='cd ~/dotfiles'
 alias gclean='git reset --hard && git clean -fd'

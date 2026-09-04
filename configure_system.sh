@@ -89,6 +89,7 @@ set_up_git_config() {
     git config --global commit.gpgsign true
     git config --global user.name "$git_name"
     git config --global user.email "$git_email"
+    git config --global core.editor "nvim"
 
     local gpg_format
     local gpg_sign
