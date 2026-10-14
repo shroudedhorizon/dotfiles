@@ -1,10 +1,11 @@
 # taps (repos)
 tap "anomalyco/tap"
 tap "deskflow/tap"
+tap "protonpass/tap"
 
 # brews (cli apps)
+brew "pass-cli"
 brew "azure-cli"
-brew "bitwarden"
 brew "doctl"
 brew "stow"
 brew "elixir"

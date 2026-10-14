@@ -80,7 +80,7 @@ set_up_git_config() {
     done
 
     while [[ -z "$public_key" ]]; do
-        read -rp "Enter your SSH Public Key from Bitwarden: " public_key
+        read -rp "Enter your SSH Public Key from Proton Pass: " public_key
     done
 
     info "SSH key found, using for signing..."
