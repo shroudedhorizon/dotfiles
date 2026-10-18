@@ -1,7 +1,6 @@
 # taps (repos)
 tap "anomalyco/tap"
 tap "deskflow/tap"
-tap "protonpass/tap"
 
 # brews (cli apps)
 brew "pass-cli"
@@ -13,8 +12,6 @@ brew "ffmpeg"
 brew "figlet"
 brew "fortune"
 brew "gtk4"
-brew "gallery-dl"
-brew "yt-dlp"
 brew "helm"
 brew "imagemagick"
 brew "fastfetch"
@@ -24,6 +21,7 @@ brew "nmap"
 brew "nvm"
 brew "php"
 brew "python@3.10"
+brew "pipx"
 brew "qrencode"
 brew "terraform"
 brew "watch"
@@ -36,5 +34,6 @@ brew "lazygit"
 
 # casks (gui apps)
 cask "ghostty"
+cask "bitwarden"
 cask "openlogi"
 cask "deskflow"

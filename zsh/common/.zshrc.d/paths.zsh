@@ -1,5 +1,5 @@
 # SSH auth sock path
-export SSH_AUTH_SOCK=~/.ssh/proton-pass-agent.sock
+export SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock
 
 # go alias path
 export PATH="$PATH:$(go env GOPATH)/bin"

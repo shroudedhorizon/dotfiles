@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-# the type of ssh key to generate.
-KEY_TYPE="ed25519"
-
 # system global vars
 OS_TYPE=$(uname)
 USERNAME=$(whoami)
@@ -80,7 +77,7 @@ set_up_git_config() {
     done
 
     while [[ -z "$public_key" ]]; do
-        read -rp "Enter your SSH Public Key from Proton Pass: " public_key
+        read -rp "Enter your SSH Public Key from Bitwarden: " public_key
     done
 
     info "SSH key found, using for signing..."
@@ -136,11 +133,23 @@ install_dependencies() {
             exit 1
         fi
 
-        brew bundle --file="$HOME/dotfiles/dependencies/Brewfile"
+        brew bundle install --file="$HOME/dotfiles/dependencies/Brewfile"
     else
         error "Unable to detect your package manager."
         exit 1;
     fi
+}
+
+# install yt-dlp, gallery-dl, and other pipx dependencies
+install_pipx_dependencies() {
+    packages=(
+        "https://codeberg.org/mikf/gallery-dl/archive/master.tar.gz"
+        "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.tar.gz"
+    )
+
+    for package in "${packages[@]}"; do
+        pipx install --force "$package"
+    done
 }
 
 install_zsh() {
@@ -207,11 +216,12 @@ post_install() {
 }
 
 run_all() {
-    install_repo
+    install_dotfiles_repo
     set_rtc_time
     install_zsh
     install_homebrew
     install_dependencies
+    install_pipx_dependencies
     set_up_git_config
     post_install
 }
