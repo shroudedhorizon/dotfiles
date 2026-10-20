@@ -51,6 +51,7 @@ set_up_git_config() {
     local git_name="${1:-}"
     local git_email="${2:-}"
     local public_key="${3:-}"
+    local gpg_status_prompt=error
 
     while [[ -z "$git_name" ]]; do
         read -rp "Enter your full name: " git_name
@@ -60,14 +61,19 @@ set_up_git_config() {
         read -rp "Enter your email address: " git_email
     done
 
-    while [[ -z "$public_key" ]]; do
-        read -rp "Enter your SSH Public Key from Bitwarden: " public_key
-    done
+    info "Leave this field empty if you don't have a key."
+    read -rp "Enter your SSH Public Key from Bitwarden: " public_key
 
-    info "SSH key found, using for signing..."
-    git config --global gpg.format ssh
-    git config --global user.signingkey "$public_key"
-    git config --global commit.gpgsign true
+    if [[ -z "$public_key" ]]; then
+        warning "No SSH public key provided. Skipping GPG signing configuration."
+    else
+        gpg_status_prompt=success
+        info "SSH key found, using for signing..."
+        git config --global gpg.format ssh
+        git config --global user.signingkey "$public_key"
+        git config --global commit.gpgsign true
+    fi
+
     git config --global user.name "$git_name"
     git config --global user.email "$git_email"
     git config --global core.editor "nvim"
@@ -80,8 +86,8 @@ set_up_git_config() {
     success "Git config has been set:"
     success "  Name : $(git config --global user.name)"
     success "  Email: $(git config --global user.email)"
-    success "  GPG Signing Key Format: ${gpg_format:-Not Configured}"
-    success "  GPG Signing Enabled: ${gpg_sign:-Not Configured}"
+    $gpg_status_prompt "  GPG Signing Key Format: ${gpg_format:-Not Configured}"
+    $gpg_status_prompt "  GPG Signing Enabled: ${gpg_sign:-Not Configured}"
 }
 
 # install homebrew if on mac
