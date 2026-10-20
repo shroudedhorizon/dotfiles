@@ -2,28 +2,12 @@
 
 set -euo pipefail
 
+# import our logging helpers
+source "$HOME/dotfiles/scripts/helpers/logging.sh"
+
 # system global vars
 OS_TYPE=$(uname)
 USERNAME=$(whoami)
-
-# Set Up Terminal colors
-if [[ -t 1 ]]; then
-    RED='\033[0;31m'
-    GREEN='\033[0;32m'
-    YELLOW='\033[0;33m'
-    BLUE='\033[0;34m'
-    CYAN='\033[0;36m'
-    BOLD='\033[1m'
-    RESET='\033[0m'
-else
-    RED=''
-    GREEN=''
-    YELLOW=''
-    BLUE=''
-    CYAN=''
-    BOLD=''
-    RESET=''
-fi
 
 install_dotfiles_repo() {
     if [ -d "$HOME/dotfiles" ]; then
@@ -227,25 +211,6 @@ run_all() {
     install_pipx_dependencies
     set_up_git_config
     post_install
-}
-
-####################
-# utility methods
-####################
-info() {
-    echo -e "${BLUE}==>${RESET} $*"
-}
-
-success() {
-    echo -e "${GREEN}✓${RESET} $*"
-}
-
-warning() {
-    echo -e "${YELLOW}!${RESET} $*"
-}
-
-error() {
-    echo -e "${RED}✗${RESET} $*" >&2
 }
 
 # run all methods in this script if a param isn't passed (param being the function name)
