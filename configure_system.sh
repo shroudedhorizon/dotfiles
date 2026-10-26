@@ -142,7 +142,7 @@ install_pipx_dependencies() {
     done
     
     # post install inject gallery-dl and yt-dlp into pipx
-    pipx inject gallery-dl yt-dlp
+    pipx inject --force gallery-dl yt-dlp
 }
 
 install_zsh() {
