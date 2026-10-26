@@ -7,7 +7,7 @@ figlet
 rofi
 stow
 g++
-telegram-desktop
+pipx
 terminator
 screenfetch
 hydrapaper

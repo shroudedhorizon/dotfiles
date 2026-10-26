@@ -5,6 +5,7 @@ htop
 fortune-mod
 figlet
 rofi
+pipx
 stow
 g++
 terminator
