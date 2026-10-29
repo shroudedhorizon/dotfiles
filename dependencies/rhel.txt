@@ -5,6 +5,7 @@ htop
 fortune-mod
 figlet
 rofi
+uv
 pipx
 stow
 g++

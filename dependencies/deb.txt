@@ -7,6 +7,7 @@ figlet
 rofi
 stow
 g++
+uv
 pipx
 terminator
 screenfetch

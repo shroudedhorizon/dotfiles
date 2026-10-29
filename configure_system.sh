@@ -2,8 +2,9 @@
 
 set -euo pipefail
 
-# import our logging helpers
+# import our helpers
 source "$HOME/dotfiles/scripts/helpers/logging.sh"
+source "$HOME/dotfiles/scripts/helpers/functions.sh"
 
 # system global vars
 OS_TYPE=$(uname)
@@ -141,7 +142,6 @@ install_pipx_dependencies() {
         pipx install --force "$package"
     done
     
-    # post install inject gallery-dl and yt-dlp into pipx
     pipx inject --force gallery-dl yt-dlp
 }
 
@@ -173,19 +173,7 @@ set_dotfile_configs() {
     done
 
     # get the right stow package based on the OS
-    local zsh_package
-    case "$OS_TYPE" in
-        Darwin)
-            zsh_package="mac"
-            ;;
-        Linux)
-            zsh_package="linux"
-            ;;
-        *)
-            error "Unsupported operating system: $OS_TYPE"
-            return 1
-            ;;
-    esac
+    zsh_package=$(get_os_friendly_name)
 
     # stow the OS specific configs
     stow \
@@ -199,6 +187,25 @@ set_dotfile_configs() {
     if [[ "$SHELL" != "/bin/zsh" ]]; then
         chsh -s /bin/zsh
     fi
+}
+
+reverse_dotfile_configs() {
+    cd "$HOME/dotfiles"
+
+    # reverse stow all of the top level dotfiles
+    for package in */; do
+        [[ "$package" == "zsh/" ]] && continue
+        stow --verbose --target="$HOME" --delete "$package"
+    done
+
+    # reverse stow the OS specific configs
+    zsh_package=$(get_os_friendly_name)
+    stow \
+        --verbose \
+        --dir="$HOME/dotfiles/zsh" \
+        --target="$HOME" \
+        --delete \
+        common "$zsh_package"
 }
 
 post_install() {
