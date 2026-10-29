@@ -23,7 +23,6 @@ fi
 # aliases
 alias dev='cd ~/projects'
 alias dots='cd ~/dotfiles'
-alias gclean='git reset --hard && git clean -fd'
 
 # run starship. make sure this line is always last.
 eval "$(starship init zsh)"

@@ -1,6 +1,5 @@
 # taps (repos)
 tap "anomalyco/tap"
-tap "deskflow/tap"
 
 # brews (cli apps)
 brew "pass-cli"
@@ -36,4 +35,3 @@ brew "lazygit"
 cask "ghostty"
 cask "bitwarden"
 cask "openlogi"
-cask "deskflow"
