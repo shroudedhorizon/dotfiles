@@ -1,0 +1,216 @@
+schema_version = 10
+
+[app_settings]
+launch_at_login = true
+check_for_updates = true
+auto_install_updates = true
+update_prompt_seen = true
+show_in_menu_bar = true
+capture_mouse_events = true
+app_icon = "prism"
+auto_download_assets = true
+asset_source = "automatic"
+thumbwheel_sensitivity = 14
+appearance = "system"
+theme_dark = "Adventure"
+smooth_scroll = false
+vertical_scroll_sensitivity = 14
+ui_scale = "normal"
+device_view_mode = "carousel"
+mouse_profile_target = "pointer"
+low_battery_notifications = true
+lock_key_notifications = true
+animate_desktop_switch = false
+update_channel = "stable"
+
+[devices]
+
+[devices."serial:2529za513m28".identity]
+display_name = "MX Master 4"
+codename = "MX Master 4 M"
+kind = "mouse"
+
+[devices."serial:2529za513m28".identity.model_info]
+entity_count = 4
+unit_id = [
+    0,
+    0,
+    0,
+    0,
+]
+model_ids = [
+    45122,
+    0,
+    0,
+]
+extended_model_id = 4
+
+[keyboard]
+
+[devices."serial:2529za513m28".identity.model_info.transports]
+usb = false
+equad = false
+btle = true
+bluetooth = false
+
+[devices."serial:2529za513m28".identity.capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = true
+fn_lock = false
+os_layout = false
+report_rate = false
+backlight = false
+easy_switch = false
+virtual_thumbwheel = false
+pointer_scaling = false
+force_sensing = false
+disable_keys = false
+
+[devices."serial:2636apney4y8".identity]
+display_name = "MX Master 4"
+codename = "MX Master 4 Special Edition"
+kind = "mouse"
+
+[devices."serial:2529za513m28".links."receiver:a3ababfd7fa0c053:slot:1".capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = true
+fn_lock = false
+os_layout = false
+report_rate = false
+backlight = false
+easy_switch = false
+virtual_thumbwheel = false
+pointer_scaling = false
+force_sensing = false
+disable_keys = false
+
+[devices."serial:2636apney4y8"]
+dpi = 1600
+dpi_presets = [1600]
+force_sensing = 5550
+
+[devices."serial:2636apney4y8".identity.model_info]
+entity_count = 4
+unit_id = [
+    0,
+    0,
+    0,
+    0,
+]
+model_ids = [
+    45122,
+    0,
+    0,
+]
+extended_model_id = 6
+
+[devices."serial:2636apney4y8".identity.model_info.transports]
+usb = false
+equad = false
+btle = true
+bluetooth = false
+
+[devices."serial:2636apney4y8".identity.capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = true
+fn_lock = false
+os_layout = false
+report_rate = false
+backlight = false
+easy_switch = true
+virtual_thumbwheel = false
+pointer_scaling = false
+force_sensing = true
+disable_keys = false
+
+[devices."serial:2636apney4y8".bindings.GestureButton]
+Up = "MissionControl"
+Down = "CloseTab"
+Left = "PreviousDesktop"
+Right = "NextDesktop"
+Click = "NewTab"
+
+[devices."serial:2636apney4y8".bindings]
+DpiToggle = "ToggleSmartShift"
+
+[devices."serial:2636apney4y8".bindings.HapticPanel]
+Up = "MissionControl"
+Down = "ShowDesktop"
+Left = "PrevTab"
+Right = "NextTab"
+Click = "ShowActionsRing"
+
+[devices."serial:2636apney4y8".action_ring]
+enabled = true
+haptics = true
+
+[devices."serial:2636apney4y8".smartshift]
+mode = "ratchet"
+auto_disengage = 12
+tunable_torque = 80
+
+[devices."serial:2636apney4y8".action_ring.default.slots.Top]
+action = "LockScreen"
+
+[devices."serial:2636apney4y8".links."receiver:70b3ccdecff45977:slot:2".capabilities]
+buttons = true
+pointer = true
+lighting = false
+scroll_inversion = true
+hires_wheel = true
+thumbwheel = true
+haptic_feedback = true
+haptic_panel = true
+dpi_gestures = true
+fn_lock = false
+os_layout = false
+report_rate = false
+backlight = false
+easy_switch = true
+virtual_thumbwheel = false
+pointer_scaling = false
+force_sensing = true
+disable_keys = false
+
+[devices."serial:2636apney4y8".action_ring.default.slots.TopRight]
+action = "Copy"
+
+[devices."serial:2636apney4y8".action_ring.default.slots.Right]
+action = "ReopenTab"
+
+[devices."serial:2636apney4y8".action_ring.default.slots.BottomRight]
+action = "AppExpose"
+
+[devices."serial:2636apney4y8".action_ring.default.slots.Bottom]
+action = "CaptureRegion"
+
+[devices."serial:2636apney4y8".action_ring.default.slots.BottomLeft]
+action = "TogglePrecisionMode"
+
+[devices."serial:2636apney4y8".action_ring.default.slots.Left]
+action = "LaunchpadShow"
+
+[devices."serial:2636apney4y8".action_ring.default.slots.TopLeft]
+action = "Sleep"
+icon = "Monitor"
