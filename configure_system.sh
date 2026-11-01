@@ -2,9 +2,20 @@
 
 set -euo pipefail
 
-# import our helpers
-source "$HOME/dotfiles/scripts/helpers/logging.sh"
-source "$HOME/dotfiles/scripts/helpers/functions.sh"
+# set up terminal colors for logging
+if [[ -t 1 ]]; then
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[0;33m'
+    BLUE='\033[0;34m'
+    RESET='\033[0m'
+else
+    RED=''
+    GREEN=''
+    YELLOW=''
+    BLUE=''
+    RESET=''
+fi
 
 # system global vars
 OS_TYPE=$(uname)
@@ -206,6 +217,44 @@ reverse_dotfile_configs() {
         --target="$HOME" \
         --delete \
         common "$zsh_package"
+}
+
+## helpers ##
+get_os_friendly_name() {
+    local zsh_package
+    case "$OS_TYPE" in
+        Darwin)
+            zsh_package="mac"
+            ;;
+        Linux)
+            zsh_package="linux"
+            ;;
+        *)
+            error "Unsupported operating system: $OS_TYPE"
+            return 1
+            ;;
+    esac
+
+    echo "$zsh_package"
+}
+
+####################
+# output logging methods
+####################
+info() {
+    printf '%b==>%b %s\n' "$BLUE" "$RESET" "$*"
+}
+
+success() {
+    printf '%b✓%b %s\n' "$GREEN" "$RESET" "$*"
+}
+
+warning() {
+    printf '%b!%b %s\n' "$YELLOW" "$RESET" "$*"
+}
+
+error() {
+    printf '%b✗%b %s\n' "$RED" "$RESET" "$*" >&2
 }
 
 post_install() {
